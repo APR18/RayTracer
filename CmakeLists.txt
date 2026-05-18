@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.31.3)
+
+project(RayTracer
+VERSION 1.0.0
+LANGUAGES C CXX
+)
+
+
+
+set(CMAKE_CXX_STANDARD			14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS		OFF)
+
+
+set(PROJECT_TARGET_NAME Raytracer)
+
+
+add_executable(${PROJECT_TARGET_NAME}
+${CMAKE_CURRENT_SOURCE_DIR}/src/RayTracer.cpp
+${CMAKE_CURRENT_SOURCE_DIR}/include/Vec3.h
+
+)
+    
+
