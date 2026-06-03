@@ -19,7 +19,9 @@ add_executable(${PROJECT_TARGET_NAME}
 ${CMAKE_CURRENT_SOURCE_DIR}/src/RayTracer.cpp
 ${CMAKE_CURRENT_SOURCE_DIR}/include/Vec3.h
 ${CMAKE_CURRENT_SOURCE_DIR}/include/Color.h
-${CMAKE_CURRENT_SOURCE_DIR}/include/Ray.h)
+${CMAKE_CURRENT_SOURCE_DIR}/include/Ray.h
+${CMAKE_CURRENT_SOURCE_DIR}/include/Hittable.h
+${CMAKE_CURRENT_SOURCE_DIR}/include/Sphere.h)
     
 target_include_directories(${PROJECT_TARGET_NAME} PUBLIC 
 ${CMAKE_CURRENT_SOURCE_DIR}/include

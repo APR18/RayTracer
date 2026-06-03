@@ -8,19 +8,20 @@ double hit_sphere(const Point3& center, double radius, const Ray& r)
 	/*a = d⋅d
 	b = −2d⋅(C−Q)
 	c = (C−Q)⋅(C−Q)−r2*/
-	Vec3 oc = center - r.origin();
-	auto a = dot(r.direction(), r.direction());
-	auto b = -2.0 * dot(r.direction(), oc);
-	auto c = dot(oc, oc) -  radius * radius;
-	//Discriminant: b² − 4ac
-	auto discriminant = b * b - (4 * a * c);
+	Vec3 oc = center - r.origin();					// this is (C − Q)
+	auto a = r.direction().length_squared();		// d·d  = |d|²
+	auto h = dot(r.direction(), oc);				// d·(C − Q)   (was b/−2)
+	auto c = oc.length_squared() - radius * radius; // (C−Q)·(C−Q) − r²
+	//Discriminant: b² − 4ac	
+	auto discriminant = h*h - ( a * c);				 // h² − ac   (was b²−4ac, /4)
+
 
 	if (discriminant < 0)
 	{
-		return -1.0;
+		return -1.0;								// missed → sentinel value
 	}
 	else {
-		return (-b - std::sqrt(discriminant)) / (2.0 * a);
+		(h - std::sqrt(discriminant)) / a;
 	}
 
 }
@@ -75,7 +76,7 @@ int main()
 		std::clog << "\rScanlines remaining: " << image_height - j << ' ' << std::flush;
 		for (int i = 0; i < image_width; i++)
 		{
-			//now we are find the center of each pixel in the image 
+			//now we find the center of each pixel in the image 
 			auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
 			// getting the direction from camera to that pixel
 			auto ray_direction = pixel_center - camera_center;
